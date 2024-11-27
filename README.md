@@ -38,7 +38,6 @@ Ren L, Wang H, Laili Y. Diff-MTS: Temporal-Augmented Conditional Diffusion-Based
 ```
 
 ## Acknowledgment
-Thanks for the helop of [Chengwen Qi]()
 
-Thanks for the [lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch) project for their support and contributions to this project.
+Thanks for the [lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch) project for their contributions to this project.
 
