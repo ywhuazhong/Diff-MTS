@@ -89,6 +89,7 @@ class GaussianDiffusionTrainer(nn.Module):
             'sqrt_alphas_bar', torch.sqrt(alphas_bar)) 
         self.register_buffer(
             'sqrt_one_minus_alphas_bar', torch.sqrt(1. - alphas_bar))
+        self.mmd_weight = nn.Parameter(torch.tensor(0.1), requires_grad=True)
         
     def forward(self, x_0, labels):
         """
@@ -100,7 +101,7 @@ class GaussianDiffusionTrainer(nn.Module):
             extract(self.sqrt_one_minus_alphas_bar, t, x_0.shape) * noise
         pred_noise = self.model(x_t, t, labels)
         if self.loss_type == 'mse+mmd':
-            loss = F.mse_loss(pred_noise, noise, reduction='none') + 0.1 * mmd_fn(noise, pred_noise)
+            loss = F.mse_loss(pred_noise, noise, reduction='none') + self.mmd_weight * mmd_fn(noise, pred_noise)
         else:
             loss = F.mse_loss(pred_noise, noise, reduction='none') 
         return loss
